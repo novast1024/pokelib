@@ -38,8 +38,8 @@ class HatSwitchInput(ButtonInput):
 
 @dataclass(frozen = True)
 class StickInput:
-    x: int = 0.0
-    y: int = 0.0
+    x: float = 0.0
+    y: float = 0.0
 
     def __add__(self, other: Self) -> Self:
         if self.x == 0.0 and self.y == 0.0:
