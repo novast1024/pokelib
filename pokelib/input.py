@@ -123,12 +123,12 @@ class Joystick:
             if self.y == -1.0:
                 l.append(prefix + Joystick.names[0])
             else:
-                l.append(f"{round(self.y, 3)}*{prefix}{Joystick.names[0]}")
+                l.append(f"{round(-self.y, 3)}*{prefix}{Joystick.names[0]}")
         elif self.y > 0.0:
             if self.y == 1.0:
                 l.append(prefix + Joystick.names[2])
             else:
-                l.append(f"{round(-self.y, 3)}*{prefix}{Joystick.names[2]}")
+                l.append(f"{round(self.y, 3)}*{prefix}{Joystick.names[2]}")
 
         if self.x > 0.0:
             if self.x == 1.0:
