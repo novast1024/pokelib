@@ -1,73 +1,72 @@
 from typing import Final
-from math import sin, cos, pi
 
-from .input import GamepadInput, StickInput
+from .input import GamepadInput, Joystick
 from . import settings
 
 # cached data
-_UP_STICK_INPUT: Final[StickInput] = StickInput(y = -1.0)
-_DOWN_STICK_INPUT: Final[StickInput] = StickInput(y = 1.0)
-_LEFT_STICK_INPUT: Final[StickInput] = StickInput(x = -1.0)
-_RIGHT_STICK_INPUT: Final[StickInput] = StickInput(x = 1.0)
+_UP: Final[Joystick] = Joystick(y = -1.0)
+_DOWN: Final[Joystick] = Joystick(y = 1.0)
+_LEFT: Final[Joystick] = Joystick(x = -1.0)
+_RIGHT: Final[Joystick] = Joystick(x = 1.0)
 
 def Up(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _UP_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _UP)
 
 def Down(seconds: float = 0.0) -> GamepadInput: 
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _DOWN_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _DOWN)
 
 def Left(seconds: float = 0.0) -> GamepadInput: 
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _LEFT_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _LEFT)
 
 def Right(seconds: float = 0.0) -> GamepadInput: 
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _RIGHT_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _RIGHT)
 
 # ==================== compass direction ==============================
 
 def N(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _UP_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _UP)
 
 def NNE(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 0.375), -sin(pi * 0.375)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(67.5))
 
 def NE(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 0.25), -sin(pi * 0.25)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(45))
 
 def ENE(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 0.125), -sin(pi * 0.125)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(22.5))
 
 def E(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _RIGHT_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _RIGHT)
 
 def ESE(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 1.875), -sin(pi * 1.875)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(337.5))
 
 def SE(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 1.75), -sin(pi * 1.75)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(315))
 
 def SSE(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 1.625), -sin(pi * 1.625)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(292.5))
 
 def S(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _DOWN_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _DOWN)
 
 def SSW(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 1.375), -sin(pi * 1.375)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(247.5))
 
 def SW(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 1.25), -sin(pi * 1.25)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(225))
 
 def WSW(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 1.125), -sin(pi * 1.125)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(202.5))
 
 def W(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = _LEFT_STICK_INPUT)
+    return GamepadInput(seconds or settings.input_seconds, rightstick = _LEFT)
 
 def WNW(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 0.875), -sin(pi * 0.875)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(157.5))
 
 def NW(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 0.75), -sin(pi * 0.75)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(135))
 
 def NNW(seconds: float = 0.0) -> GamepadInput:
-    return GamepadInput(seconds or settings.input_seconds, rightstick = StickInput(cos(pi * 0.625), -sin(pi * 0.625)))
+    return GamepadInput(seconds or settings.input_seconds, rightstick = Joystick.from_deg(112.5))
