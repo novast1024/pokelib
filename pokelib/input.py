@@ -200,7 +200,7 @@ class GamepadInput:
             return str(round(self.seconds, 3))
     
     def to_bytes(self) -> bytes:
-        self.buttons.to_bytes() + self.hatswitch.to_bytes() + self.leftstick.to_bytes() + self.rightstick.to_bytes()
+        return self.buttons.to_bytes() + self.hatswitch.to_bytes() + self.leftstick.to_bytes() + self.rightstick.to_bytes()
 
     def to_pokecon_str(self, is_leftstick_changed = True, is_rightstick_changed = True) -> str:
         l: list = []
