@@ -87,13 +87,14 @@ class Test(ImageProcPythonCommand):
             Combo(A(0.1), 0.1)*1090,
 
             LS.DOWN(3), 5, LS.LEFT(6),
-            X, 1, A, 1, Combo(RIGHT, 0.1, DOWN, 0.1)*4, Combo(A(1.5), 1.5)*4, B, 1, B,
+            X, 1, A, 1, Combo(RIGHT, 0.1, DOWN, 0.1)*4, Combo(A(0.1), 1.5)*4, B, 1, B,
             LS.UP(2), LS.LEFT(3.5), LS.DOWN(2.5),
-            Combo(A)*30, LS.DOWN(3.5), LS.LEFT(7.5),
-            Combo(A)*100, LS.DOWN+LS.RIGHT(1.5), LS.RIGHT(7.5),
-            Combo(A)*180, LS.RIGHT(1.5), LS.UP+LS.RIGHT(2), LS.UP(4), LS.RIGHT(4.5), LS.DOWN(2.3), LS.RIGHT(2.0),
-            Combo(A)*100, LS.UP+LS.LEFT(4), LS.LEFT(3.5), LS.DOWN(4.1), LS.LEFT(2),
-            Combo(A)*130, LS.DOWN+LS.RIGHT(5.0), Combo(A)*420, Y, 3, Combo(A)*4, 1, X, DOWN, A,
+            Combo(A(0.1), 0.1)*30, LS.DOWN(3.5), LS.LEFT(7.5),
+            Combo(A(0.1), 0.1)*100, LS.DOWN+LS.RIGHT(1.5), LS.RIGHT(7.5),
+            Combo(A(0.1), 0.1)*180, LS.RIGHT(1.5), LS.UP+LS.RIGHT(2), LS.UP(4), LS.RIGHT(4.5), LS.DOWN(2.3), LS.RIGHT(2.0),
+            Combo(A(0.1), 0.1)*100, LS.UP+LS.LEFT(4), LS.LEFT(3.5), LS.DOWN(4.1), LS.LEFT(2),
+            Combo(A(0.1), 0.1)*130, LS.DOWN+LS.RIGHT(5.0),
+            Combo(A(0.1), 0.1)*420, Y, 3, Combo(A, 0.1)*4, 1, X, DOWN, A,
         )
 
         send(c)
