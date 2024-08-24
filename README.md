@@ -1,4 +1,4 @@
-# pokelib2
+# pokelib
 
 install & uninstall
 ```
