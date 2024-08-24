@@ -46,11 +46,11 @@ class Test(ImageProcPythonCommand):
         settings.minimum_interval = 0.0
         settings.input_visible = True
 
-        right_rotation = Combo()
+        rotate_right = Combo()
         for deg in range(0, 360, 15):
-            right_rotation += Combo(LS.UP.rotate(deg))
+            rotate_right += Combo(LS.UP.rotate(deg))
 
-        send(right_rotation*3)
+        send(rotate_right*3)
 ```
 
 ```
