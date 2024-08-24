@@ -19,7 +19,7 @@ initialize
 settings.python_command = self
 settings.input_seconds = 0.05
 settings.minimum_interval = 0.05
-settings.input_visible = True
+settings.input_visible = False
 ```
 
 constants
