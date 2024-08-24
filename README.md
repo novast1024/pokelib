@@ -1,4 +1,4 @@
-# pokelib
+# my poke-controller library
 
 install & uninstall
 ```
