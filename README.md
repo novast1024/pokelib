@@ -19,6 +19,7 @@ initialize
 settings.python_command = self
 settings.input_seconds = 0.05
 settings.minimum_interval = 0.05
+settings.input_visible = True
 ```
 
 constants
@@ -43,6 +44,7 @@ class Test(ImageProcPythonCommand):
         settings.python_command = self
         settings.input_seconds = 0.01
         settings.minimum_interval = 0.0
+        settings.input_visible = True
 
         c = Combo()
         for i in range(0, 360, 15):
