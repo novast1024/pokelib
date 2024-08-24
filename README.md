@@ -37,8 +37,8 @@ from pokelib import settings
 from pokelib.constants import *
 from pokelib.combo import *
 
-class Test(ImageProcPythonCommand):
-    NAME = "テスト"
+class KuruKuruKuru(ImageProcPythonCommand):
+    NAME = "くるくるくる"
 
     def do(self):
         settings.python_command = self
@@ -50,7 +50,7 @@ class Test(ImageProcPythonCommand):
         for i in range(0, 360, 15):
             c += Combo(LS.UP.rotate(i))
         
-        send(c*5)
+        send(c*3)
 ```
 
 ```
