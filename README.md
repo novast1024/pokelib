@@ -37,7 +37,7 @@ from pokelib import settings
 from pokelib.constants import *
 from pokelib.combo import *
 
-class KuruKuruKuru(ImageProcPythonCommand):
+class Test(ImageProcPythonCommand):
     NAME = "くるくるくる"
 
     def do(self):
@@ -46,11 +46,11 @@ class KuruKuruKuru(ImageProcPythonCommand):
         settings.minimum_interval = 0.0
         settings.input_visible = True
 
-        c = Combo()
-        for i in range(0, 360, 15):
-            c += Combo(LS.UP.rotate(i))
-        
-        send(c*3)
+        right_rotation = Combo()
+        for deg in range(0, 360, 15):
+            right_rotation += Combo(LS.UP.rotate(deg))
+
+        send(right_rotation*3)
 ```
 
 ```
