@@ -89,9 +89,10 @@ class Combo:
                         cmd = b"0" + cmd
 
                     settings.python_command.keys.ser.ser.write(cmd)
+                    # print(cmd)
+                    time.sleep(x.seconds)
                     if isEmpty(x):
                         settings.python_command.checkIfAlive()
-                    time.sleep(x.seconds)
 
                     previous = x
                 elif type(x) is Combo:
@@ -142,7 +143,9 @@ def _parse(self, args: tuple[Combo|Input|float|int|Hold|EndHold]) -> list[Combo|
 
 setattr(Combo, "_parse", _parse)
 
-def send(combo: Combo):
+def send(*args: Self|Input|float|int|Hold|EndHold):
+    combo = Combo()
+    combo._pool = combo._parse(args)
     last = combo._send()
     if not isEmpty(last):
         Combo(EMPTY)._send(last)
