@@ -88,11 +88,10 @@ class Combo:
                     if cmd[0] < ord("0") or ord("9") < cmd[0]:
                         cmd = b"0" + cmd
 
+                    if settings.input_visible: print(x)
                     settings.python_command.keys.ser.ser.write(cmd)
-                    # print(cmd)
                     time.sleep(x.seconds)
-                    if isEmpty(x):
-                        settings.python_command.checkIfAlive()
+                    if isEmpty(x): settings.python_command.checkIfAlive()
 
                     previous = x
                 elif type(x) is Combo:
