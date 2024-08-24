@@ -1,8 +1,11 @@
 # My Poke-Controller MODIFIED Library
 
-install & uninstall
+install
 ```
 pip install git+https://github.com/novast1024/pokelib
+```
+uninstall
+```
 pip uninstall pokelib
 ```
 import
