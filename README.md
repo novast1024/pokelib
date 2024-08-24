@@ -65,6 +65,7 @@ class Test(ImageProcPythonCommand):
         settings.python_command = self
         settings.input_seconds = 0.05
         settings.minimum_interval = 0.05
+        settings.input_visible = True
 
         c = Combo(
             Combo(A)*5, 4,
@@ -83,7 +84,7 @@ class Test(ImageProcPythonCommand):
             Combo(RIGHT)*4, A, # o
             PLUS, 4,
 
-            Combo(A)*1100,
+            Combo(A(0.1), 0.1)*1090,
 
             LS.DOWN(3), 5, LS.LEFT(6),
             X, 1, A, 1, Combo(RIGHT, 0.1, DOWN, 0.1)*4, Combo(A(1.5), 1.5)*4, B, 1, B,
