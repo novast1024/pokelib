@@ -14,7 +14,7 @@ from pokelib.combo import *
 from pokelib.constants import *
 from pokelib import settings
 ```
-initialize
+settings
 ```
 settings.python_command = self
 settings.input_seconds = 0.05
