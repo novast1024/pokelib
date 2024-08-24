@@ -42,7 +42,7 @@ class Test(ImageProcPythonCommand):
 
     def do(self):
         settings.python_command = self
-        settings.input_seconds = 0.01
+        settings.input_seconds = 0.03
         settings.minimum_interval = 0.0
         settings.input_visible = True
 
