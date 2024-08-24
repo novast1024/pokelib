@@ -15,6 +15,15 @@ settings.python_command = self
 settings.input_seconds = 0.05
 settings.minimum_interval = 0.05
 ```
+
+constants
+```
+Y B A X L R ZL ZR MINUS PLUS LS RS HOME CAPTURE # Buttons
+UP DOWN LEFT RIGHT # Hat Switch
+LS.UP LS.DOWN LS.LEFT LS.RIGHT # Left Stick
+RS.UP RS.DOWN RS.LEFT RS.RIGHT # Right Stick
+```
+example
 ```
 from Commands.PythonCommandBase import PythonCommand, ImageProcPythonCommand
 
