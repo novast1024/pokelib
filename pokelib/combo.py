@@ -26,7 +26,44 @@ class Combo:
         self._pool = self._parse(args) if len(args) else []
         self._repeat = 1
 
-    def _parse(self, args: tuple[Self|Input|float|int|Hold|EndHold]) -> list[Self|Input]: pass
+    def _parse(self, args: tuple[Self|Input|float|int|Hold|EndHold]) -> list[Self|Input]:
+        ret: list[Combo | Input] = []
+        input = EMPTY
+        delay = 0.0
+        auto_delay = 0.0
+        for x in args:
+            if isinstance(x, (int, float)):
+                delay += x
+            elif isinstance(x, Input):
+                if delay or auto_delay:
+                    ret.append(Input(seconds=max(delay, auto_delay)) + input)
+                    delay = 0.0
+                ret.append(x + input)
+                auto_delay = settings.minimum_interval
+            elif isinstance(x, Combo):
+                if delay or auto_delay:
+                    ret.append(Input(seconds=max(delay, auto_delay)) + input)
+                    delay = 0.0
+                if x._repeat != 1:
+                    ret.append(x.hold(input))
+                else:
+                    ret += x.hold(input)._pool
+                auto_delay = 0.0
+            elif isinstance(x, Hold):
+                input += x.input
+            elif isinstance(x, EndHold):
+                if (x.input):
+                    input -= x.input
+                else:
+                    input = EMPTY
+            elif x is EndHold:
+                input = EMPTY
+            else:
+                raise ValueError(f"Illegal Argument: {x}")
+
+        if delay or auto_delay:
+            ret.append(Input(seconds=max(delay, auto_delay)))
+        return ret
 
     def __add__(self, other: Self) -> Self:
         return Combo(self, other)
@@ -99,48 +136,6 @@ class Combo:
                 else:
                     raise Exception()
         return previous
-
-
-def _parse(self, args: tuple[Combo|Input|float|int|Hold|EndHold]) -> list[Combo|Input]:
-    ret: list[Combo | Input] = []
-    input = EMPTY
-    delay = 0.0
-    auto_delay = 0.0
-    for x in args:
-        if isinstance(x, (int, float)):
-            delay += x
-        elif isinstance(x, Input):
-            if delay or auto_delay:
-                ret.append(Input(seconds=max(delay, auto_delay)) + input)
-                delay = 0.0
-            ret.append(x + input)
-            auto_delay = settings.minimum_interval
-        elif isinstance(x, Combo):
-            if delay or auto_delay:
-                ret.append(Input(seconds=max(delay, auto_delay)) + input)
-                delay = 0.0
-            if x._repeat != 1:
-                ret.append(x.hold(input))
-            else:
-                ret += x.hold(input)._pool
-            auto_delay = 0.0
-        elif isinstance(x, Hold):
-            input += x.input
-        elif isinstance(x, EndHold):
-            if (x.input):
-                input -= x.input
-            else:
-                input = EMPTY
-        elif x is EndHold:
-            input = EMPTY
-        else:
-            raise ValueError(f"Illegal Argument: {x}")
-
-    if delay or auto_delay:
-        ret.append(Input(seconds=max(delay, auto_delay)))
-    return ret
-
-setattr(Combo, "_parse", _parse)
 
 def send(*args: Self|Input|float|int|Hold|EndHold):
     combo = Combo()
