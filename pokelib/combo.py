@@ -135,7 +135,7 @@ class Combo:
                     if settings.input_visible: print(x)
                     settings.python_command.keys.ser.ser.write(cmd)
                     if isEmpty(x): settings.python_command.checkIfAlive()
-                    while time.perf_counter() - start < x.seconds: pass
+                    time.sleep(x.seconds - (time.perf_counter() - start))
                     previous = x
                 elif type(x) is Combo:
                     previous = x._send(previous)
