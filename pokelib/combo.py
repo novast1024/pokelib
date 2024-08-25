@@ -104,7 +104,6 @@ class Combo:
         for _ in range(self._repeat):
             for x in self._pool:
                 if type(x) is Input:
-                    start = time.perf_counter()
                     leftstick_changed = x._leftstick != previous._leftstick
                     rightstick_changed = x._rightstick != previous._rightstick
 
@@ -134,8 +133,8 @@ class Combo:
 
                     if settings.input_visible: print(x)
                     settings.python_command.keys.ser.ser.write(cmd)
+                    time.sleep(x.seconds)
                     if isEmpty(x): settings.python_command.checkIfAlive()
-                    time.sleep(x.seconds - (time.perf_counter() - start))
                     previous = x
                 elif type(x) is Combo:
                     previous = x._send(previous)
