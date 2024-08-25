@@ -52,17 +52,23 @@ class Combo:
             elif isinstance(x, Hold):
                 input += x.input
             elif isinstance(x, EndHold):
+                if delay:
+                    ret.append(Input(seconds=delay) + input)
+                    delay = 0.0
                 if (x.input):
                     input -= x.input
                 else:
                     input = EMPTY
             elif x is EndHold:
+                if delay:
+                    ret.append(Input(seconds=delay) + input)
+                    delay = 0.0
                 input = EMPTY
             else:
                 raise ValueError(f"Illegal Argument: {x}")
 
         if delay or auto_delay:
-            ret.append(Input(seconds=max(delay, auto_delay)))
+            ret.append(Input(seconds=max(delay, auto_delay)) + input)
         return ret
 
     def __add__(self, other: Self) -> Self:
@@ -142,4 +148,6 @@ def send(*args: Self|Input|float|int|Hold|EndHold):
     combo._pool = combo._parse(args)
     last = combo._send()
     if not isEmpty(last):
-        Combo(EMPTY)._send(last)
+        c = Combo()
+        c._pool = [EMPTY]
+        c._send(last)
