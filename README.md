@@ -47,3 +47,16 @@ class Test(ImageProcPythonCommand):
 
         send(rotate_right*3)
 ```
+
+```
+import serial
+from pokelib import *
+
+settings.serial = serial.Serial("COM3", 9600)
+settings.input_seconds = 0.05
+settings.minimum_interval = 0
+settings.input_visible = False
+
+rotate_right = Combo(*[LS.UP.rotate(deg) for deg in range(0, 360, 45)])
+send(rotate_right*5)
+```
