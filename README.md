@@ -10,9 +10,7 @@ pip uninstall pokelib
 ```
 import
 ```
-from pokelib.combo import *
-from pokelib.constants import *
-from pokelib import settings
+from pokelib import *
 ```
 settings
 ```
@@ -32,10 +30,7 @@ RS.UP RS.DOWN RS.LEFT RS.RIGHT # Right Stick
 example
 ```
 from Commands.PythonCommandBase import PythonCommand, ImageProcPythonCommand
-
-from pokelib import settings
-from pokelib.constants import *
-from pokelib.combo import *
+from pokelib import *
 
 class Test(ImageProcPythonCommand):
     NAME = "くるくるくる"
