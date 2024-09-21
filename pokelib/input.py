@@ -11,10 +11,10 @@ class Input:
     seconds: float | None = None
 
     def __add__(self, other: Input) -> Self:
-        return replace(self, report = self.report.__add__(other.report))
+        return replace(self, report = self.report.__add__(other.report), seconds = self.seconds if self.seconds else other.seconds)
 
     def __sub__(self, other: Input) -> Self:
-        return replace(self, report = self.report.__sub__(other.report))
+        return replace(self, report = self.report.__sub__(other.report), seconds = self.seconds if self.seconds else other.seconds)
 
     def __call__(self, seconds: float) -> Self:
         return replace(self, seconds = seconds)

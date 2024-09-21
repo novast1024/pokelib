@@ -1,7 +1,7 @@
 from typing import Protocol
 
 class Serial(Protocol):
-    def write(self, data: bytes) -> int:
+    def write(self, data: bytes | str) -> int | None:
         ...
 
 class Sender(Protocol):

@@ -27,8 +27,8 @@ class Buttons(SupportsBytes):
 
     names = ("Y","B","A","X","L","R","ZL","ZR","MINUS","PLUS","LS","RS","HOME","CAPTURE")
 
-    def to_names(self) -> list[str]:
-        return [name for i, name in enumerate(self.names) if self.state & (1 << i)] if self.state else []
+    def to_names(self) -> tuple[str, ...]:
+        return tuple(name for i, name in enumerate(self.names) if self.state & (1 << i)) if self.state else ()
 
     @classmethod
     def from_name(cls, name: str) -> Self:
@@ -37,7 +37,6 @@ class Buttons(SupportsBytes):
     @classmethod
     def from_bytes(cls, bytes: bytes | list[int]) -> Self:
         return cls(int.from_bytes(bytes, "little"))
-
 
 class HatSwitch(Buttons):
     # name      UP   UP+RIGHT RIGHT DOWN+RIGHT DOWN DOWN+LEFT  LEFT  UP+LEFT
@@ -109,18 +108,18 @@ class AnalogStick(SupportsBytes):
 
     names = ("UP","DOWN","LEFT","RIGHT")
 
-    def to_names(self) -> list[str]:
+    def to_names(self) -> tuple[str, ...]:
         x = round(self.x, 2)
         y = round(self.y, 2)
 
         return (
-            [self.names[0] if y == -1.0 else f"{-y:0.2f}*{self.names[0]}"] if y < 0.0 else
-            [self.names[1] if y == 1.0 else f"{y:0.2f}*{self.names[1]}"] if y > 0.0 else
-            []
+            (self.names[0] if y == -1.0 else f"{-y:0.2f}*{self.names[0]}",) if y < 0.0 else
+            (self.names[1] if y == 1.0 else f"{y:0.2f}*{self.names[1]}",) if y > 0.0 else
+            ()
         ) + (
-            [self.names[2] if x == -1.0 else f"{-x:0.2f}*{self.names[2]}"] if x < 0.0 else
-            [self.names[3] if x == 1.0 else f"{x:0.2f}*{self.names[3]}"] if x > 0.0 else
-            []
+            (self.names[2] if x == -1.0 else f"{-x:0.2f}*{self.names[2]}",) if x < 0.0 else
+            (self.names[3] if x == 1.0 else f"{x:0.2f}*{self.names[3]}",) if x > 0.0 else
+            ()
         )
 
     @classmethod
@@ -178,10 +177,6 @@ class Report:
     @classmethod
     def from_bytes(cls, data: bytes | list[int]):
         return cls(Buttons.from_bytes(data[0:2]), HatSwitch.from_bytes(data[2:3]), LeftStick.from_bytes(data[3:5]), RightStick.from_bytes(data[5:7]))
-
-    @classmethod
-    def from_button(cls, name: str) -> Self:
-        return cls(buttons = Buttons.from_name(name))
 
     @classmethod
     def from_name(cls, name: str) -> Self:
