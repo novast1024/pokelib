@@ -126,6 +126,9 @@ class Combo:
                     ret += it.add_to_all_elements(hold).elements
                 auto_delay = 0.0
             elif isinstance(it, Hold):
+                if delay:
+                    ret.append(Input(hold.report, delay))
+                    delay = 0.0
                 hold += it.input
             else: # isinstance(it, EndHold)
                 if delay:
