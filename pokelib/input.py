@@ -99,25 +99,13 @@ class Combo:
         self.elements = self.__parse(args) if len(args) else []
         self.repeat = repeat
 
-    def __parse(self, args: tuple[list[Combo|Input|int|float|Hold|EndHold] | Combo | Input | float | int | Hold | EndHold, ...]) -> list[Combo | Input]:
+    def __parse(self, args: tuple[Combo | Input | float | int | Hold | EndHold, ...]) -> list[Combo | Input]:
         ret: list[Combo | Input] = []
         hold = NOP
         delay = 0.0
         auto_delay = 0.0
         for it in args:
-            if isinstance(it, list):
-                for x in it:
-                    if isinstance(x, (float, int)):
-                        delay += x
-                    elif isinstance(x, Input):
-                        if x.report == NOP.report:
-                            delay += x.seconds or settings.input_seconds
-                        else:
-                            if delay:
-                                ret.append(Input(hold.report, delay))
-
-
-            elif isinstance(it, (float, int)):
+            if isinstance(it, (float, int)):
                 delay += it
             elif isinstance(it, Input):
                 if it.report == NOP.report:
@@ -126,7 +114,7 @@ class Combo:
                     if delay or auto_delay:
                         ret.append(Input(hold.report, max(delay, auto_delay)))
                         delay = 0.0
-                    ret.append(it)
+                    ret.append(it + hold)
                     auto_delay = settings.minimum_interval
             elif isinstance(it, Combo):
                 if delay or auto_delay:
